@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+
+    <title> Clínica Dental Adolf Dental Care Update Send Bill </title>
+
+{% endblock %}
+
+{% block container %}
+
+<style>
+
+    body{
+        overflow: hidden;
+    }
+
+    form {
+        padding: 10%;
+    }
+
+</style>
+
+    {% if record != False %}
+
+    <form method="POST" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        <input type="hidden" name="consultation" value="{{ consultation.pk }}">
+        <input type="hidden" name="user" value="{{ consultation.user_id }}">
+        <input type="hidden" name="status" value="Pending">
+
+        <p>Are you sure you want to send the bill of this appointment to your pacient? </p>
+
+        <button class="btn btn-info" type="submit"> Send </button>
+        <a href="{% url 'appointments:feed_doctors' %}" class="btn btn-primary"> Cancel </a>
+
+    </form>
+
+    {% else %}
+
+    <form>
+        <p> You already have send the bill of this appointment to your pacient. </p>
+        <a href="{% url 'appointments:feed_doctors' %}" class="btn btn-primary"> Go Back </a>
+    </form>
+
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+
+<title> Clínica Dental Adolf Dental Care Add Consultations </title>
+
+{% endblock %}
+
+{% block container %}
+
+    <style>
+        body {
+            overflow: hidden;
+        }
+
+        form {
+            padding: 5%;
+        }
+    </style>
+
+    <form method="POST" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        <input type="hidden" name="doctor" value="{{ doctor_id }}">
+        <input type="hidden" name="block" value="{{ data.block_id }}">
+        <input type="hidden" name="user" value="{{ data.user_id }}">
+        <input type="hidden" name="appointment" value="{{ appointment_id }}">
+
+        <div class="form-group">
+            <label> Add Symtoms: </label>
+            <textarea class="form-control" name="symtoms" rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label> Add Treatment: </label>
+            <textarea class="form-control" name="treatment" rows="3"></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label> Add Medicaments: </label>
+            <textarea class="form-control" name="medicaments" rows="3"></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label> Add Price: </label>
+            <input type="number" class="form-control" name="price">
+        </div>
+
+        <div class="form-group">
+            <label> Select Payment: </label>
+            <select class="form-control" name="payment">
+                <option value="Cash"> Cash </option>
+                <option value="Transfer"> Transfer </option>
+                <option value="Paypal"> PayPal </option>
+                <option value="Zelle"> Zelle </option>
+            </select>
+        </div>
+
+        <button class="btn btn-info" type="submit"> Finish </button>
+        <a href="{% url 'appointments:feed_doctors' %}" class="btn btn-primary"> Cancel </a>
+
+    </form>
+
+{% endblock %}

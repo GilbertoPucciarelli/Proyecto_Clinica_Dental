@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+
+<title> Clínica Dental Adolf Dental Care Add Appointment </title>
+
+{% endblock %}
+
+{% block container %}
+
+    <style>
+        body {
+            overflow: hidden;
+        }
+
+        form {
+            padding: 10%;
+        }
+    </style>
+
+    {% if appointment == True %}
+
+    <form method="POST" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        <input type="hidden" name="user" value="{{ user_id }}">
+        <input type="hidden" name="block" value="{{ block_id }}">
+        <input type="hidden" name="status" value="Stand By">
+
+        <p>Are you sure you want to add this Appointment? </p>
+        <button class="btn btn-info" type="submit"> Add </button>
+        <a href="{% url 'appointments:add_preview' %}" class="btn btn-primary"> Cancel </a>
+
+    </form>
+
+    {% else %}
+    
+    <form>
+        <p> This appointment is already taken, please go back and select another one. </p>
+        <a href="{% url 'appointments:add_preview' %}" class="btn btn-primary"> Go Back </a>
+    </form>
+    
+    {% endif %}
+
+{% endblock %}

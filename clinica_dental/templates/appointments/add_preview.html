@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+<title> Clínica Dental Adolf Dental Care Available Appointments </title>
+{% endblock %}
+
+{% block container %}
+
+<style>
+    table,
+    form {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        margin: 100px 0 0 25px;
+    }
+
+    td,
+    th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+        text-align: center;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+
+    body {
+        overflow: hidden;
+    }
+
+    .container-2{
+        margin: 50px 0 0px 25px;
+        padding-left: 43%;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+
+        <table>
+
+            <tr>
+                <th> Doctor ID </th>
+                <th> Doctor </th>
+                <th> Hour </th>
+                <th> Day </th>
+                <th> Status </th>
+            </tr>
+
+            {% for block in blocks %}
+            <tr>
+                <td>
+                    {{ block.doctor_id }}
+                </td>
+                <td>
+                    {{ block.doctor_name}}
+                </td>
+                <td>
+                    {% if block.hour == '1' %}
+                        7:00 - 8:30
+                    {% elif block.hour == '2' %}
+                        8:45 - 10:15
+                    {% elif block.hour == '3' %}
+                        10:30 - 12:00
+                    {% elif block.hour == '4' %}
+                        12:15 - 1:45
+                    {% elif block.hour == '5' %}
+                        2:00 - 3:30
+                    {% elif block.hour == '6' %}
+                        3:45 - 5:15
+                    {% elif block.hour == '7' %}
+                        5:30 - 7:00
+                    {% endif %}
+                </td>
+                <td>
+                    {% if block.day == '1' %}
+                        Monday
+                    {% elif block.day == '2' %}
+                        Tuesday
+                    {% elif block.day == '3' %}
+                        Wednesday
+                    {% elif block.day == '4' %}
+                        Thrusday
+                    {% elif block.day == '5' %}
+                        Friday         
+                    {% endif %}      
+                </td>
+                <td>
+                    <a href="{% url 'appointments:add_appointments' block.id %}" class="btn btn-info"> Select </a>
+                </td>
+            </tr>
+            {% endfor %}
+
+        </table>
+
+    </div>
+</div>
+
+{% endblock %}

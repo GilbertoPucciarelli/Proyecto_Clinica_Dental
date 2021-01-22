@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+<title> Clínica Dental Adolf Dental Care Medical Records Feed </title>
+{% endblock %}
+
+{% block container %}
+
+<style>
+    table,
+    form {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        margin: 100px 0 0 25px;
+    }
+
+    td,
+    th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+        text-align: center;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+
+    body {
+        overflow: hidden;
+    }
+
+    .container-2 {
+        margin: 50px 0 0px 25px;
+        padding-left: 43%;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+
+        <table>
+
+            <tr>
+                <th> DNI </th>
+                <th> Age </th>
+                <th> Birthday </th>
+                <th> Marital Status </th>
+                <th> Nacionality </th>
+                <th> Address </th>
+                <th> Consultations </th>
+            </tr>
+
+            {% for record in records %}
+            {% if user.id == record.user_id %}
+            <tr>
+            
+                <td>
+                    {{ record.dni }}
+                </td>
+                <td>
+                    {{ record.age }}
+                </td>
+                <td>
+                    {{ record.birthday }}
+                </td>
+                <td>
+                    {{ record.marital_status }}
+                </td>
+                <td>
+                    {{ record.nacionality }}
+                </td>
+                <td>
+                    {{ record.address }}
+                </td>
+                <td>
+                    <a href="{% url 'medical_records:feed_pacient' record.user_id %}" class="btn btn-info"> Check </a>
+                </td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+
+        </table>
+
+    </div>
+</div>
+
+{% endblock %}

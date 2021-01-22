@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+
+<title>Clínica Dental Adolf Dental Care Statistics </title>
+
+{% endblock %}
+
+{% block container %}
+
+<style>
+    table,
+    form {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        margin: 50px 0 0 25px;
+    }
+
+    td,
+    th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+        text-align: center;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+
+    body{
+        overflow: hidden;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+
+        <table>
+
+            <tr>
+                <th> Stand By Appointments </th>
+                <th> {{ standby_appointments }} </th>
+            </tr>
+
+            <tr>
+                <th> Done Appointments </th>
+                <th> {{ done_appointments }} </th>
+            </tr>
+
+            <tr>
+                <th> Cancel Appointments </th>
+                <th> {{ cancel_appointments }} </th>
+            </tr>
+
+            <tr>
+                <th> Total Appointments </th>
+                <th> {{ total_appointments }} </th>
+            </tr>
+
+            <tr>
+                <th></th>
+                <th></th>
+            </tr>
+
+            <tr>
+                <th> Pending Bills </th>
+                <th> {{ pending_bills }} </th>
+            </tr>
+
+            <tr>
+                <th> Done Bills </th>
+                <th> {{ done_bills }} </th>
+            </tr>
+
+            <tr>
+                <th> Total Bills </th>
+                <th> {{ total_bills }}</th>
+            </tr>
+
+            <tr>
+                <th></th>
+                <th></th>
+            </tr>
+
+            <tr>
+                <th> Total Earnings </th>
+                <th> {{ earnings }} $ </th>
+            </tr>
+
+        </table>
+
+    </div>
+</div>
+
+{% endblock %}

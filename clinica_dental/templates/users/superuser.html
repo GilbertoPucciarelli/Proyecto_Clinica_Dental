@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+
+<title>Clínica Dental Adolf Dental Care Administration </title>
+
+{% endblock %}
+
+{% block container %}
+
+<style>
+    table,
+    form {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        margin: 50px 0 0 25px;
+    }
+
+    td,
+    th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+        text-align: center;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+
+        <table>
+
+            <tr>
+                <th> # </th>
+                <th> User Name </th>
+                <th> First Name </th>
+                <th> Last Name </th>
+                <th> Email </th>
+                <th> Role </th>
+                <th> Bloqued </th>
+                <th> Status </th>
+            </tr>
+
+            {% for user in users %}
+            <tr>
+                <td> {{ user.user_id }} </td>
+                <td> {{ user.user.username }} </td>
+                <td> {{ user.user.first_name }} </td>
+                <td> {{ user.user.last_name }} </td>
+                <td> {{ user.user.email }} </td>
+                <td> {{ user.role }} </td>
+                <td> {{ user.bloqued }} </td>
+                <td><a href="{% url 'users:edit_user' user.user_id %}" class="btn btn-info"> Update </a></td>
+            </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+
+    <title> Clínica Dental Adolf Dental Care Update Status Appointments </title>
+
+{% endblock %}
+
+{% block container %}
+
+<style>
+
+    body{
+        overflow: hidden;
+    }
+
+    form {
+        padding: 10%;
+    }
+
+</style>
+
+
+    <form method="POST" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        <input type="hidden" name="status" value="Cancel">
+
+        <p>Are you sure you want to cancel this Appointment? </p>
+
+        <button class="btn btn-info" type="submit"> Update </button>
+        <a href="{% url 'appointments:feed_doctors' %}" class="btn btn-primary"> Cancel </a>
+
+    </form>
+
+{% endblock %}

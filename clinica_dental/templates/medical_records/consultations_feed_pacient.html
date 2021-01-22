@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+<title> Clínica Dental Adolf Dental Care Consultations Feed Pacient </title>
+{% endblock %}
+
+{% block container %}
+
+<style>
+    table,
+    form {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        margin: 100px 0 0 25px;
+    }
+
+    td,
+    th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+        text-align: center;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+
+    body {
+        overflow: hidden;
+    }
+
+    .container-2 {
+        margin: 50px 0 0px 25px;
+        padding-left: 43%;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+
+        <table>
+
+            <tr>
+                <th> Day </th>
+                <th> Hour </th>
+                <th> Doctor Name </th>
+                <th> Symtoms </th>
+                <th> Treatment </th>
+                <th> Medicaments </th>
+                <th> Price </th>
+                <th> Payment </th>
+            </tr>
+
+            {% for consultation in consultations %}
+            {% if consultation.user_id == user_id %}
+            <tr>
+                {% for block in blocks %}
+                {% if block.pk == consultation.block_id %}
+                <td>
+                    {% if block.hour == '1' %}
+                        7:00 - 8:30
+                    {% elif block.hour == '2' %}
+                        8:45 - 10:15
+                    {% elif block.hour == '3' %}
+                        10:30 - 12:00
+                    {% elif block.hour == '4' %}
+                        12:15 - 1:45
+                    {% elif block.hour == '5' %}
+                        2:00 - 3:30
+                    {% elif block.hour == '6' %}
+                        3:45 - 5:15
+                    {% elif block.hour == '7' %}
+                        5:30 - 7:00
+                    {% endif %}
+                </td>
+                <td>
+                    {% if block.day == '1' %}
+                        Monday
+                    {% elif block.day == '2' %}
+                        Tuesday
+                    {% elif block.day == '3' %}
+                        Wednesday
+                    {% elif block.day == '4' %}
+                        Thrusday
+                    {% elif block.day == '5' %}
+                        Friday         
+                    {% endif %}      
+                </td>
+                {% endif %}
+                {% endfor %}
+                
+                {% for user in users %}
+                {% if user.id == consultation.doctor_id %}
+                <td>
+                    {{ user.get_full_name }}
+                </td>
+                {% endif %}
+                {% endfor %}
+                
+                <td>
+                    {{ consultation.symtoms }}
+                </td>
+                <td>
+                    {{ consultation.treatment }}
+                </td>
+                <td>
+                    {{ consultation.medicaments }}
+                </td>
+                <td>
+                    {{ consultation.price }}$
+                </td>
+                <td>
+                    {{ consultation.payment }}
+                </td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+
+        </table>
+
+        <div class="container-2">
+            <a href="{% url 'medical_records:feed' %}" class="btn btn-info"> Go back </a>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

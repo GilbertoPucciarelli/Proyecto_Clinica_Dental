@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+<title> Clínica Dental Adolf Dental Care Account Status </title>
+{% endblock %}
+
+{% block container %}
+
+<style>
+    table,
+    form {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        margin: 100px 0 0 25px;
+    }
+
+    td,
+    th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+        text-align: center;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+
+    .container-2 {
+        margin: 50px 0 0px 25px;
+        padding-left: 43%;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+
+        <table>
+        
+            <tr>
+                <th> Doctor Name </th>
+                <th> Day </th>
+                <th> Hour </th>
+                <th> Price </th>
+                <th> Payment </th>
+                <th> Status </th>
+            </tr>
+
+            {% for account in accounts %}
+            {% for consultation in consultations %}
+            {% if account.consultation_id == consultation.id and consultation.user_id == user_id %}
+
+            <tr>
+            
+                {% for user in users %}
+                {% if user.pk == consultation.doctor_id %}
+                <td>
+                    {{ user.get_full_name }}
+                </td>
+                {% endif %}
+                {% endfor %}
+
+                {% for block in blocks %}
+                {% if block.pk == consultation.block_id %}
+                <td>
+                    {% if block.hour == '1' %}
+                        7:00 - 8:30
+                    {% elif block.hour == '2' %}
+                        8:45 - 10:15
+                    {% elif block.hour == '3' %}
+                        10:30 - 12:00
+                    {% elif block.hour == '4' %}
+                        12:15 - 1:45
+                    {% elif block.hour == '5' %}
+                        2:00 - 3:30
+                    {% elif block.hour == '6' %}
+                        3:45 - 5:15
+                    {% elif block.hour == '7' %}
+                        5:30 - 7:00
+                    {% endif %}
+                </td>
+                <td>
+                    {% if block.day == '1' %}
+                        Monday
+                    {% elif block.day == '2' %}
+                        Tuesday
+                    {% elif block.day == '3' %}
+                        Wednesday
+                    {% elif block.day == '4' %}
+                        Thrusday
+                    {% elif block.day == '5' %}
+                        Friday         
+                    {% endif %}      
+                </td>
+                {% endif %}
+                {% endfor %}
+
+                <td>
+                    {{ consultation.price }}$
+                </td>
+                <td>
+                    {{ consultation.payment }}
+                </td>
+                <td>
+                    {{ account.status }}
+                </td>
+
+            </tr>
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+        </table>
+
+    </div>
+</div>
+
+{% endblock %}

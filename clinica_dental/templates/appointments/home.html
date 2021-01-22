@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+<title> Clínica Dental Adolf Dental Care </title>
+{% endblock %}
+
+{% block container %}
+
+<style>
+    .row, .container-h1 {
+        margin-top: 100px;
+        align-content: center;
+    }
+
+    h1{
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        text-align: center;
+    }
+
+    body {
+        overflow: hidden;
+    }
+
+</style>
+
+<body>
+
+    <div class="container-h1">
+        <div class="row">
+
+            <div class="container">
+                <h1> Welcome to Clínica Dental Adolf Care </h1>
+            </div>
+
+            {% for usuario in usuarios %}
+                {% if usuario.user_id == user.id and usuario.role == 'Super User' and usuario.bloqued != True %}
+                
+                <div class="row justify-content-md-center">
+                    <div class="col-sm-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title"> Manage Users </h5>
+                                <p class="card-text"> Manage the users that are registered in the system.
+                                </p>
+                                <a href="{% url 'users:superuser' %}" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="col-sm-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title"> General Statistics </h5>
+                                <p class="card-text">View and manage the general statistics of the clinic.
+                                </p>
+                                <a href="{% url 'users:statistics' %}" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="col-sm-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title"> Manage Payments </h5>
+                                <p class="card-text">Manage the percentage of payments of each doctor.
+                                </p>
+                                <a href="" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+    
+                </div>
+                
+                {% endif %}
+            {% endfor %}
+
+            {% for usuario in usuarios %}
+                {% if usuario.user_id == user.id and usuario.role == 'Pacient' and usuario.bloqued != True %}
+                
+                <div class="row justify-content-md-center">
+                    <div class="col-sm-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title"> Add Appointments </h5>
+                                <p class="card-text">Add and manage your appointments with the doctors. 
+                                </p>
+                                <a href="{% url 'appointments:feed' %}" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="col-sm-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title"> Manage Medical Record </h5>
+                                <p class="card-text"> View and manage your medical records saved in the clinic.
+                                </p>
+                                <a href="{% url 'medical_records:feed' %}" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="col-sm-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title"> Account Status </h5>
+                                <p class="card-text"> Check your account status and make payments. 
+                                </p>
+                                <a href="{% url 'medical_records:account' %}" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+    
+                </div>
+                
+                {% endif %}
+            {% endfor %}
+
+            {% for usuario in usuarios %}
+                {% if usuario.user_id == user.id and usuario.role == 'Doctor' and usuario.bloqued != True %}
+                
+                <div class="row justify-content-md-center">
+                    <div class="col-sm-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title"> Manage Appointments </h5>
+                                <p class="card-text"> Confirm, modify or cancel the appointments that you have. 
+                                </p>
+                                <a href="{% url 'appointments:feed_doctors' %}" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="col-sm-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title"> Manage Work Blocks </h5>
+                                <p class="card-text"> Manage the days and hours of work as your convinience. 
+                                </p>
+                                <a href="{% url 'appointments:work_blocks' %}" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="col-sm-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title"> Manage Medical Records </h5>
+                                <p class="card-text"> Manage the medical records of your pacients. 
+                                </p>
+                                <a href="{% url 'medical_records:feed_doctors' %}" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+    
+                </div>
+                
+                {% endif %}
+
+                {% if usuario.bloqued == True %}
+                
+                <div class="row justify-content-md-center">
+                    <div class="col-sm-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title"> Contact Us </h5>
+                                <p class="card-text"> Send an email to CDAC@hotmail.com for more information. 
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="col-sm-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title"> ¡User Bloqued! </h5>
+                                <p class="card-text"> Please contact us for more information about your profile. 
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="col-sm-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title"> Call Us </h5>
+                                <p class="card-text"> Call us to +58 7000 0000 for more information. 
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+    
+                </div>
+
+                {% endif %}
+
+            {% endfor %}
+
+        </div>
+    </div>
+</body>
+
+{% endblock %}
